@@ -271,6 +271,16 @@
   .upload-list{list-style:none;margin:0 0 14px}
   .upload-list li{font-size:13.5px;color:#cfd3d9;padding:6px 0 6px 26px;position:relative}
   .upload-list li::before{content:"📷";position:absolute;left:0;font-size:13px}
+  .helper{font-size:12.5px;color:var(--muted);font-style:italic;margin:-2px 0 6px;padding-left:2px;line-height:1.5}
+  .checks{display:grid;gap:9px;margin:6px 0 10px}
+  .checks label,.ack label{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#cfd3d9;cursor:pointer}
+  .checks input,.ack input{margin-top:3px;accent-color:#e1306c;width:16px;height:16px;flex:none}
+  .yn{display:flex;gap:20px;margin:4px 0 8px}
+  .yn label{display:flex;gap:7px;align-items:center;font-size:14px;color:#cfd3d9;cursor:pointer}
+  .yn input{accent-color:#e1306c}
+  .ack{background:var(--surface2);border-radius:14px;padding:14px 18px;margin:8px 0 20px}
+  .ack label{padding:8px 0;font-size:13.5px}
+  .rq{color:#e1306c}
 
   /* reviews */
   .reviews{background:var(--surface)}
@@ -367,6 +377,8 @@
   /* launch: hide SAMPLE reviews until real ones are collected */
   .demo-banner,.rev-grid{display:none}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 </head>
 <body>
 
@@ -800,61 +812,107 @@
            mark the row unpaid, then send the buyer to the $499 payment link. Wired frontend-only for now. -->
       <form id="hfForm" onsubmit="return submitIntake(event)">
 
-        <div class="fgroup">1 · About you</div>
+        <div class="fgroup">1 · How to reach you</div>
+        <label class="fld"><span>Full legal name <span class="rq">*</span></span><input name="full_name" type="text" required></label>
+        <p class="helper">Exactly as it should print on the letter — this goes on two envelopes and a legal notice. A nickname or wrong address costs a re-do.</p>
         <div class="fld-row">
-          <label class="fld"><span>Full name *</span><input name="name" type="text" required></label>
-          <label class="fld"><span>State you live in *</span><input name="state" type="text" placeholder="e.g. California" required></label>
+          <label class="fld"><span>Email <span class="rq">*</span></span><input name="email" type="email" required></label>
+          <label class="fld"><span>Phone <span class="rq">*</span></span><input name="phone" type="tel" required></label>
         </div>
-        <div class="fld-row">
-          <label class="fld"><span>Email *</span><input name="email" type="email" placeholder="you@email.com" required></label>
-          <label class="fld"><span>Phone *</span><input name="phone" type="tel" placeholder="(555) 000-0000" required></label>
-        </div>
+        <label class="fld"><span>Street address <span class="rq">*</span></span><input name="street" type="text" required></label>
+        <label class="fld"><span>City, State, ZIP <span class="rq">*</span></span><input name="citystatezip" type="text" required></label>
 
-        <div class="fgroup">2 · Your account</div>
-        <label class="fld"><span>Instagram handle *</span><input name="handle" type="text" placeholder="@yourhandle" required></label>
+        <div class="fgroup">2 · The account</div>
         <div class="fld-row">
-          <label class="fld"><span>How long have you had it?</span><input name="age" type="text" placeholder="e.g. 6 years"></label>
-          <label class="fld"><span>What was it for? *</span>
-            <select name="type" required><option value="">Choose…</option><option>Business / brand</option><option>Creator / influencer</option><option>Personal</option><option>Nonprofit</option></select></label>
+          <label class="fld"><span>Platform <span class="rq">*</span></span><select name="platform" required><option value="">Choose…</option><option>Instagram</option><option>Facebook</option><option>Both</option><option>Other</option></select></label>
+          <label class="fld"><span>Account handle <span class="rq">*</span></span><input name="handle" type="text" placeholder="@yourhandle" required></label>
         </div>
-        <label class="fld"><span>Any other / connected accounts?</span><input name="connected" type="text" placeholder="Second accounts, old ad accounts, business pages"></label>
+        <label class="fld"><span>How long did you have it? <span class="rq">*</span></span><select name="account_age" required><option value="">Choose…</option><option>Under 1 year</option><option>1–3 years</option><option>3–5 years</option><option>5–10 years</option><option>10+ years</option></select></label>
+        <label class="fld"><span>What was this account to you? <span class="rq">*</span></span><textarea name="account_meaning" rows="2" placeholder="Be specific: income, client contacts, storefront, nonprofit outreach" required></textarea></label>
+        <label class="fld"><span>Were other accounts of yours disabled at the same time?</span>
+          <div class="yn"><label><input type="radio" name="others_disabled" value="Yes">Yes</label><label><input type="radio" name="others_disabled" value="No">No</label></div>
+          <input name="others_list" type="text" placeholder="If yes, list the handles"></label>
 
         <div class="fgroup">3 · What happened</div>
+        <label class="fld"><span>Date it was disabled <span class="rq">*</span></span><input name="date_down" type="date" required></label>
+        <label class="fld"><span>Exact words on the screen when you try to log in <span class="rq">*</span></span><textarea name="screen_text" rows="2" placeholder="Type it word for word" required></textarea></label>
+        <label class="fld"><span>Screenshot of that screen</span><input name="login_shot" type="file" accept="image/*,.pdf,.heic"></label>
         <div class="fld-row">
-          <label class="fld"><span>Date it was taken down *</span><input name="date_down" type="date" required></label>
-          <label class="fld"><span>Current status *</span>
-            <select name="status" required><option value="">Choose…</option><option>Suspended (can still appeal)</option><option>Disabled (permanent)</option><option>User not found</option><option>Locked / can't log in</option></select></label>
+          <label class="fld"><span>Can you still log in at all?</span><select name="can_login"><option value="">Choose…</option><option>No access</option><option>Can log in but restricted</option><option>Not sure</option></select></label>
+          <label class="fld"><span>Mentions deletion or a deadline?</span><select name="mentions_deletion"><option value="">Choose…</option><option>Yes</option><option>No</option><option>Not sure</option></select></label>
         </div>
-        <label class="fld"><span>Exact words on your screen *</span>
-          <textarea name="screen_text" rows="2" placeholder='e.g. "account integrity — association with another account"' required></textarea></label>
-        <label class="fld"><span>Reason Meta gave, if any</span><input name="reason" type="text" placeholder="Terms of Use / Community Standards / none given"></label>
+        <p class="helper">Deletion risk means we rush — it changes your priority order.</p>
+
+        <div class="fgroup">4 · The support case</div>
         <div class="fld-row">
-          <label class="fld"><span>Times you've appealed</span><input name="appeals" type="text" placeholder="e.g. 3"></label>
-          <label class="fld"><span>Have Meta Verified?</span>
-            <select name="verified"><option>No</option><option>Yes</option></select></label>
+          <label class="fld"><span>Support case / reference ID</span><input name="case_id" type="text"></label>
+          <label class="fld"><span>Date you opened it</span><input name="case_date" type="date"></label>
+        </div>
+        <label class="fld"><span>Roughly how many reps handled it?</span><select name="reps_count"><option value="">Choose…</option><option>1</option><option>2–3</option><option>4–6</option><option>7+</option><option>No human ever</option></select></label>
+        <label class="fld"><span>Did you ever ask what policy you violated? <span class="rq">*</span></span>
+          <div class="yn"><label><input type="radio" name="asked_policy" value="Yes" required>Yes</label><label><input type="radio" name="asked_policy" value="No">No</label></div></label>
+        <label class="fld"><span>If yes — what exactly did they say?</span><textarea name="policy_answer" rows="2"></textarea></label>
+        <p class="helper">This is the single most valuable question here. If you never asked, go ask before we write anything.</p>
+        <label class="fld"><span>Were you formally denied?</span>
+          <div class="yn"><label><input type="radio" name="denied" value="Yes">Yes</label><label><input type="radio" name="denied" value="No">No</label></div></label>
+        <div class="fld-row">
+          <label class="fld"><span>Denial date</span><input name="denied_date" type="date"></label>
+          <label class="fld"><span>Their exact wording</span><input name="denied_wording" type="text"></label>
         </div>
 
-        <div class="fgroup">4 · Your losses</div>
+        <div class="fgroup">5 · What you already tried</div>
+        <div class="checks">
+          <label><input type="checkbox" name="tried" value="In-app appeals">Submitted in-app appeals</label>
+          <label><input type="checkbox" name="tried" value="Account Quality review">Requested review on Account Quality</label>
+          <label><input type="checkbox" name="tried" value="Support chat">Contacted support chat</label>
+          <label><input type="checkbox" name="tried" value="Meta Verified">Paid for Meta Verified</label>
+          <label><input type="checkbox" name="tried" value="Closed old ad accounts">Closed or removed old ad accounts</label>
+          <label><input type="checkbox" name="tried" value="Removed from portfolio">Removed yourself from a business portfolio</label>
+          <label><input type="checkbox" name="tried" value="BBB">Filed with BBB</label>
+          <label><input type="checkbox" name="tried" value="State AG">Filed with a state Attorney General</label>
+          <label><input type="checkbox" name="tried" value="FTC">Filed with the FTC</label>
+          <label><input type="checkbox" name="tried" value="Nothing yet">Nothing yet</label>
+        </div>
+        <label class="fld"><span>For anything checked — what happened?</span><textarea name="tried_detail" rows="2"></textarea></label>
+
+        <div class="fgroup">6 · The money</div>
         <div class="fld-row">
-          <label class="fld"><span>Total money lost ($)</span><input name="loss_total" type="text" inputmode="numeric" placeholder="e.g. 8,400"></label>
-          <label class="fld"><span>Roughly per day ($)</span><input name="loss_day" type="text" inputmode="numeric" placeholder="e.g. 300"></label>
+          <label class="fld"><span>What did it bring in, roughly? ($) <span class="rq">*</span></span><input name="income_amount" type="text" inputmode="numeric" placeholder="e.g. 6,000" required></label>
+          <label class="fld"><span>Per <span class="rq">*</span></span><select name="income_per" required><option value="">Choose…</option><option>Day</option><option>Week</option><option>Month</option><option>Year</option></select></label>
+        </div>
+        <label class="fld"><span>What could prove that?</span></label>
+        <div class="checks">
+          <label><input type="checkbox" name="proof" value="Bank deposits">Bank deposits</label>
+          <label><input type="checkbox" name="proof" value="Payment processor">Payment processor</label>
+          <label><input type="checkbox" name="proof" value="Invoices">Invoices</label>
+          <label><input type="checkbox" name="proof" value="Booking system">Booking system</label>
+          <label><input type="checkbox" name="proof" value="Ad spend records">Ad spend records</label>
+          <label><input type="checkbox" name="proof" value="Nothing documented">Nothing documented</label>
+        </div>
+        <p class="helper">If nothing's documented, we write "losses are accruing daily" with no figure — a soft claim beats a number that collapses.</p>
+
+        <div class="fgroup">7 · Who else this affects</div>
+        <label class="fld"><span>Does anyone besides you get hurt by this account being gone?</span><textarea name="who_else" rows="2" placeholder="Customers who can't find you, a nonprofit's community, employees, partners"></textarea></label>
+        <p class="helper">Optional, but it's the paragraph the Attorney General actually reads.</p>
+
+        <div class="fgroup">8 · Evidence</div>
+        <p class="upload-hint">Upload everything, or paste a share link if the files are large:</p>
+        <label class="fld"><span>Upload your screenshots <span class="rq">*</span></span><input name="screenshots" type="file" accept="image/*,.pdf,.heic" multiple>
+          <small>Support chats (scrolled back to the FIRST message), denial emails, the Account Quality page, any dashboard showing good standing.</small></label>
+        <label class="fld"><span>…or paste a share link</span><input name="share_link" type="url" placeholder="Google Drive / Dropbox link"></label>
+        <label class="fld"><span>Have you scrolled each support chat back to the very first message? <span class="rq">*</span></span><select name="scrolled_back" required><option value="">Choose…</option><option>Yes</option><option>No</option><option>Some of them</option></select></label>
+
+        <div class="fgroup">9 · Anything I should know</div>
+        <label class="fld"><span>Is there anything in these chats or on any connected account that might look bad? <span class="rq">*</span></span><textarea name="might_look_bad" rows="3" placeholder="Be honest. I'd much rather know now than be surprised later." required></textarea></label>
+
+        <div class="fgroup">10 · Before you submit</div>
+        <div class="ack">
+          <label><input type="checkbox" name="ack1" required>I understand this is document preparation, not legal advice, and that Get My IG Back is not an attorney.</label>
+          <label><input type="checkbox" name="ack2" required>I understand no outcome is guaranteed.</label>
+          <label><input type="checkbox" name="ack3" required>I understand I will file the complaints, sign the letters, and mail them myself.</label>
+          <label><input type="checkbox" name="ack4" required>Everything I've provided is accurate to the best of my knowledge.</label>
         </div>
 
-        <div class="fgroup">5 · Upload everything</div>
-        <p class="upload-hint">Screenshot all of these and upload them together — the more proof, the stronger your case:</p>
-        <ul class="upload-list">
-          <li>The login / suspended / disabled screen</li>
-          <li>Every Meta support chat, top to bottom</li>
-          <li>Every denial or "we reviewed it" email</li>
-          <li>The Account Quality page (business.facebook.com/accountquality)</li>
-          <li>Any dashboard showing your account in GOOD standing</li>
-          <li>Every case number and reference number</li>
-        </ul>
-        <label class="fld"><span>Upload all screenshots &amp; documents *</span>
-          <input name="screenshots" type="file" accept="image/*,.pdf,.heic" multiple required>
-          <small>Select as many files as you have — PNG, JPG, HEIC and PDF all work.</small></label>
-
-        <div class="note">By continuing you confirm this account was disabled in error and did not violate Instagram/Meta policies or the law. Everything you send is used solely to prepare and file your case.</div>
         <button type="submit" class="btn block">Continue to payment — $499 →</button>
       </form>
     </div>
@@ -875,13 +933,55 @@
   function openIntake(){document.getElementById('intake').classList.add('open');document.body.style.overflow='hidden';
     document.getElementById('intakeForm').style.display='block';document.getElementById('intakePay').style.display='none';}
   function closeIntake(){document.getElementById('intake').classList.remove('open');document.body.style.overflow='';}
-  function submitIntake(e){
-    e.preventDefault();
-    // BACKEND HOOKUP: send new FormData(document.getElementById('hfForm')) to your backend here,
-    // create an UNPAID case record, then reveal the payment step below.
+  // Supabase client (null until config.js is filled in — form still works, just won't save yet)
+  var _sb = (window.supabase && window.SB_URL && String(window.SB_URL).indexOf('http')===0)
+    ? window.supabase.createClient(window.SB_URL, window.SB_KEY) : null;
+
+  function revealPay(){
     document.getElementById('intakeForm').style.display='none';
     document.getElementById('intakePay').style.display='block';
-    document.querySelector('.sheet').scrollTop=0;
+    var sheet=document.querySelector('.sheet'); if(sheet) sheet.scrollTop=0;
+  }
+
+  async function submitIntake(e){
+    e.preventDefault();
+    var form=document.getElementById('hfForm');
+    var btn=form.querySelector('button[type=submit]');
+    var label=btn.textContent;
+    if(_sb){
+      btn.disabled=true;
+      try{
+        var fd=new FormData(form);
+        // gather files from every file input (login_shot + screenshots)
+        var allFiles=[];
+        form.querySelectorAll('input[type=file]').forEach(function(inp){
+          for(var i=0;i<inp.files.length;i++) allFiles.push(inp.files[i]);
+        });
+        var paths=[];
+        for(var i=0;i<allFiles.length;i++){
+          var f=allFiles[i];
+          btn.textContent='Uploading '+(i+1)+'/'+allFiles.length+'…';
+          var safe=f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+          var path=Date.now()+'-'+Math.random().toString(36).slice(2,8)+'-'+safe;
+          var up=await _sb.storage.from('case-files').upload(path,f);
+          if(!up.error) paths.push(path);
+        }
+        btn.textContent='Saving…';
+        // collect every non-file field; multi-value keys (tried, proof) become arrays
+        var data={};
+        fd.forEach(function(v,k){
+          if(v instanceof File) return;
+          if(data[k]!==undefined){ data[k]=[].concat(data[k], v); } else { data[k]=v; }
+        });
+        await _sb.from('cases').insert({
+          status:'unpaid',
+          name:fd.get('full_name'), email:fd.get('email'), phone:fd.get('phone'), handle:fd.get('handle'),
+          files:paths, data:data
+        });
+      }catch(err){ console.error('intake save failed', err); }
+      btn.disabled=false; btn.textContent=label;
+    }
+    revealPay();
     return false;
   }
   document.getElementById('intake').addEventListener('click',function(e){if(e.target===this)closeIntake();});
