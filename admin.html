@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Get My IG Back</title>
+<style>
+  :root{
+    --ink:#111214;--paper:#ffffff;--muted:#6b7178;--line:#e7e9ec;
+    --green:#e1306c;--green-d:#c1275c;--orange:#fa7e1e;
+    --ig-grad:linear-gradient(95deg,#feda75 0%,#fa7e1e 22%,#e1306c 52%,#962fbf 78%,#4f5bd5 100%);
+    --mono:"SF Mono",ui-monospace,"Menlo","Consolas",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);background:#f6f7f8;-webkit-font-smoothing:antialiased;font-size:15px}
+  a{color:var(--green)}
+  .topbar{background:var(--ink);color:#fff;padding:16px 28px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+  .glyph{width:24px;height:24px;border:2px solid #fff;border-radius:7px;display:inline-grid;place-items:center;position:relative}
+  .glyph::before{content:"";width:10px;height:10px;border:2px solid #fff;border-radius:50%}
+  .glyph::after{content:"";position:absolute;top:3px;right:3px;width:3px;height:3px;background:#fff;border-radius:50%}
+  .topbar .out{color:#9aa0a6;font-size:13px;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:28px}
+
+  .demo{background:#fff3ec;border:1px solid #ffd9cc;color:#b23c17;border-radius:10px;
+    padding:14px 18px;font-size:13.5px;font-weight:600;margin-bottom:24px}
+  .demo code{font-family:var(--mono);background:#fff;padding:1px 6px;border-radius:4px}
+
+  /* gate */
+  .gate{max-width:380px;margin:80px auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:38px;text-align:center;
+    box-shadow:0 30px 70px -40px rgba(0,0,0,.3)}
+  .gate h1{font-size:24px;letter-spacing:-.02em;margin-bottom:8px}
+  .gate p{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .gate input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;font-size:15px;margin-bottom:12px}
+  .gate input:focus{outline:none;border-color:var(--green)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ig-grad);color:#fff;border:none;
+    border-radius:10px;padding:13px 24px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;width:100%}
+  .btn:hover{filter:brightness(1.07) saturate(1.05)}
+  .gate .hint{font-size:12px;color:var(--muted);margin-top:14px}
+
+  /* dashboard */
+  #dash{display:none}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+  .stat b{display:block;font-size:30px;letter-spacing:-.03em}
+  .stat span{color:var(--muted);font-size:13px}
+  h2{font-size:20px;letter-spacing:-.02em;margin:8px 0 16px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:28px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;background:#fafbfc;color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .handle{font-weight:700}
+  .mono{font-family:var(--mono);font-size:12.5px}
+  .pill{display:inline-block;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.02em}
+  .pill.paid{background:#fce4ef;color:var(--green-d)}
+  .pill.unpaid{background:#fdeee7;color:#b23c17}
+  .shots a{display:inline-block;margin:0 4px 4px 0;font-size:12px;background:#f1f2f4;border-radius:6px;padding:3px 8px;text-decoration:none;color:var(--ink)}
+  .rev-mod{display:flex;gap:14px;align-items:flex-start;padding:16px 14px;border-bottom:1px solid var(--line)}
+  .rev-mod:last-child{border-bottom:none}
+  .rev-mod .stars{color:#f5a623;font-size:13px}
+  .rev-mod .body{flex:1}
+  .rev-mod .body b{font-size:14px}
+  .rev-mod .body p{font-size:13.5px;color:#2a2d30;margin-top:4px}
+  .rev-mod .acts{display:flex;gap:8px;flex:none}
+  .mini{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+  .mini.ok{border-color:var(--green);color:var(--green-d)} .mini.no{border-color:#ffd9cc;color:#b23c17}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="glyph"></span> Get My IG Back — Admin</div>
+  <a href="index.html" class="out">← Back to site</a>
+</div>
+
+<!-- LOGIN GATE (frontend demo — replace with real auth, e.g. Supabase Auth, before going live) -->
+<div id="gate" class="wrap">
+  <div class="gate">
+    <h1>Owner login</h1>
+    <p>Enter your admin passcode to view submissions.</p>
+    <input id="pw" type="password" placeholder="Passcode" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn" onclick="login()">Log in</button>
+    <div class="hint">Demo gate — passcode is <b>demo</b>. Replace with real authentication before launch.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="wrap">
+  <div class="demo">
+    ⚠ DEMO / MOCKUP — the rows below are <b>sample data</b>. Connect your backend so this pulls real, <b>paid</b> Hands-Free submissions.
+    Backend hookup: query your <code>cases</code> table where <code>status = 'paid'</code>, and read uploaded files from storage.
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>12</b><span>Paid cases</span></div>
+    <div class="stat"><b>3</b><span>Awaiting payment</span></div>
+    <div class="stat"><b>4</b><span>Letters mailed</span></div>
+    <div class="stat"><b>$5,988</b><span>Hands-Free revenue</span></div>
+  </div>
+
+  <h2>Paid Hands-Free submissions</h2>
+  <div class="panel">
+    <table>
+      <thead><tr>
+        <th>Submitted</th><th>Handle</th><th>Date down</th><th>Loss</th><th>$/day</th>
+        <th>Login screen says</th><th>Screenshots</th><th>Status</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">Aug 09, 2026</td>
+          <td class="handle">@brightbakesco</td>
+          <td class="mono">Jul 21</td>
+          <td class="mono">$8,400</td><td class="mono">$300</td>
+          <td>"account integrity — association with another account"</td>
+          <td class="shots"><a href="#">login.png</a><a href="#">chat1.png</a><a href="#">denial.png</a><a href="#">quality.png</a></td>
+          <td><span class="pill paid">Paid</span></td>
+        </tr>
+        <tr>
+          <td class="mono">Aug 08, 2026</td>
+          <td class="handle">@theironmethod</td>
+          <td class="mono">Jul 30</td>
+          <td class="mono">$3,150</td><td class="mono">$175</td>
+          <td>"we suspended your account" — no reason listed</td>
+          <td class="shots"><a href="#">login.png</a><a href="#">chat1.png</a><a href="#">chat2.png</a></td>
+          <td><span class="pill paid">Paid</span></td>
+        </tr>
+        <tr>
+          <td class="mono">Aug 06, 2026</td>
+          <td class="handle">@lagos.threads</td>
+          <td class="mono">Jul 18</td>
+          <td class="mono">$12,000</td><td class="mono">$500</td>
+          <td>"your account doesn't follow our Community Guidelines"</td>
+          <td class="shots"><a href="#">login.png</a><a href="#">denial1.png</a><a href="#">denial2.png</a><a href="#">good-standing.png</a><a href="#">quality.png</a></td>
+          <td><span class="pill paid">Paid</span></td>
+        </tr>
+        <tr style="opacity:.6">
+          <td class="mono">Aug 09, 2026</td>
+          <td class="handle">@coastalclayco</td>
+          <td class="mono">Aug 02</td>
+          <td class="mono">$1,900</td><td class="mono">$95</td>
+          <td>"account disabled" — appeal button greyed out</td>
+          <td class="shots"><a href="#">login.png</a></td>
+          <td><span class="pill unpaid">Awaiting payment</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Reviews awaiting approval</h2>
+  <div class="panel">
+    <div class="rev-mod">
+      <div class="body">
+        <div class="stars">★★★★★</div>
+        <b>Marcus D. · DIY playbook</b>
+        <p>"Three months of appeals, nothing. Sent the two letters like the guide said. Fourteen days later my account was just… back."</p>
+      </div>
+      <div class="acts"><button class="mini ok">Approve</button><button class="mini no">Reject</button></div>
+    </div>
+    <div class="rev-mod">
+      <div class="body">
+        <div class="stars">★★★★☆</div>
+        <b>Ava L. · DIY playbook</b>
+        <p>"Took closer to 30 days but it worked. The templates saved me."</p>
+      </div>
+      <div class="acts"><button class="mini ok">Approve</button><button class="mini no">Reject</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Frontend demo gate only — NOT security. Replace with real auth before launch.
+  function login(){
+    var v=document.getElementById('pw').value.trim().toLowerCase();
+    if(v==='demo'){document.getElementById('gate').style.display='none';document.getElementById('dash').style.display='block';}
+    else{alert('Wrong passcode. (Demo passcode is: demo)');}
+  }
+</script>
+</body>
+</html>
