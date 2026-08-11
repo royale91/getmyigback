@@ -942,20 +942,44 @@
     var sheet=document.querySelector('.sheet'); if(sheet) sheet.scrollTop=0;
   }
 
+  // email alert (Web3Forms) — pings the owner on every new case
+  var WEB3FORMS_KEY="0b304882-9cbf-4d30-8e65-bd744708204d";
+  async function notifyEmail(fd, fileCount){
+    if(!WEB3FORMS_KEY) return;
+    try{
+      await fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({
+          access_key:WEB3FORMS_KEY,
+          subject:'🔔 New Hands-Free case: '+(fd.get('handle')||fd.get('full_name')||'unknown'),
+          from_name:'Get My IG Back',
+          Name:fd.get('full_name'), Email:fd.get('email'), Phone:fd.get('phone'),
+          Handle:fd.get('handle'), Platform:fd.get('platform'),
+          Date_disabled:fd.get('date_down'), Status:fd.get('status'),
+          Income:(fd.get('income_amount')||'?')+' per '+(fd.get('income_per')||'?'),
+          Photos_uploaded:fileCount,
+          Heads_up:fd.get('might_look_bad')||'(none)',
+          View_full_case:'https://getmyigback.com/admin/'
+        })
+      });
+    }catch(err){ console.error('email notify failed', err); }
+  }
+
   async function submitIntake(e){
     e.preventDefault();
     var form=document.getElementById('hfForm');
     var btn=form.querySelector('button[type=submit]');
     var label=btn.textContent;
+    var fd=new FormData(form);
+    // gather files from every file input (login_shot + screenshots)
+    var allFiles=[];
+    form.querySelectorAll('input[type=file]').forEach(function(inp){
+      for(var i=0;i<inp.files.length;i++) allFiles.push(inp.files[i]);
+    });
     if(_sb){
       btn.disabled=true;
       try{
-        var fd=new FormData(form);
-        // gather files from every file input (login_shot + screenshots)
-        var allFiles=[];
-        form.querySelectorAll('input[type=file]').forEach(function(inp){
-          for(var i=0;i<inp.files.length;i++) allFiles.push(inp.files[i]);
-        });
         var paths=[];
         for(var i=0;i<allFiles.length;i++){
           var f=allFiles[i];
@@ -980,6 +1004,7 @@
       }catch(err){ console.error('intake save failed', err); }
       btn.disabled=false; btn.textContent=label;
     }
+    await notifyEmail(fd, allFiles.length);
     revealPay();
     return false;
   }
