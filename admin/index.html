@@ -76,7 +76,7 @@
 <div class="topbar">
   <div class="brand"><span class="glyph"></span> Get My IG Back — Admin</div>
   <div>
-    <a href="index.html" class="out" style="margin-right:16px">← Site</a>
+    <a href="/" class="out" style="margin-right:16px">← Site</a>
     <button class="out" id="logoutBtn" style="display:none" onclick="logout()">Log out</button>
   </div>
 </div>
@@ -111,7 +111,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
+<script src="/config.js"></script>
 <script>
   var sb = (window.supabase && window.SB_URL && String(window.SB_URL).indexOf('http')===0)
     ? window.supabase.createClient(window.SB_URL, window.SB_KEY) : null;
