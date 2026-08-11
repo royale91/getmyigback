@@ -1,7 +1,4 @@
 // ── Get My IG Back · backend config ──────────────────────────────
-// Paste your Supabase project values below, then redeploy.
-// Find them in Supabase: Project Settings → API.
-//   Project URL  →  SB_URL   (looks like https://abcd1234.supabase.co)
-//   anon public key  →  SB_KEY   (a long "eyJ..." string — the ANON key, NOT service_role)
-window.SB_URL = "";
-window.SB_KEY = "";
+// Supabase project (getmyigback). SB_KEY is the public/publishable key — safe to ship.
+window.SB_URL = "https://nugwceeedfjszmnixgcw.supabase.co";
+window.SB_KEY = "sb_publishable_9qBCcY7xx3LpTcUlVGWXWA_Fy9pw0Iw";
