@@ -374,8 +374,13 @@
   .offer{transition:transform .32s ease,box-shadow .32s ease}
   .offer:hover{transform:translateY(-6px)}
   @media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
-  /* launch: hide SAMPLE reviews until real ones are collected */
+  /* reviews: honest empty state until real ones are collected */
   .demo-banner,.rev-grid{display:none}
+  .rev-empty{max-width:680px;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px 32px}
+  .rev-empty p{color:var(--muted);font-size:15.5px;line-height:1.7;margin-bottom:12px}
+  .rev-empty .rev-empty-lead{color:var(--ink);font-size:19px;font-weight:700;margin-bottom:10px}
+  .rev-empty .rev-empty-cta{color:#c8ccd4;margin-bottom:0;margin-top:16px;border-top:1px solid var(--line);padding-top:16px}
+  .rev-empty .rev-empty-cta b{color:var(--ink)}
 </style>
 <link rel="canonical" href="https://accountrecovered.com/">
 <meta name="robots" content="index,follow">
@@ -445,7 +450,7 @@
 <header class="hero">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
   <div class="wrap">
-    <h1>GET YOUR<br>ACCOUNT BACK</h1>
+    <h1>GET YOUR INSTAGRAM<br>ACCOUNT BACK</h1>
     <p class="kicker">Meta's support is a robot now. Your page got caught in it.</p>
     <p class="sub">The exact steps that recovered a 15-year business account after 28&nbsp;days disabled — the appeal button never did it. Something else did.</p>
     <div class="cta-row">
@@ -524,10 +529,20 @@
         </div>
       </div>
       <div class="phone-dots"><i class="on"></i><i></i><i></i><i></i></div>
-      <p class="phone-cap">The real screens people wake up to — on a loop. Personal details redacted.</p>
+      <p class="phone-cap">Real screens, used with permission — on a loop. Personal details redacted.</p>
     </div>
   </div>
 </header>
+
+<!-- DEADLINE CALLOUT — honest urgency, straight off their own screen -->
+<div style="background:#1a1210;border-top:1px solid #3a2a20;border-bottom:1px solid #3a2a20">
+  <div class="wrap" style="padding:22px 24px;text-align:center">
+    <p style="color:#f0b48a;font-size:15px;line-height:1.6;max-width:760px;margin:0 auto">
+      ⏱ <b style="color:#ffd9bf">If your screen shows a countdown, that's a real deadline.</b>
+      When it runs out, the data is deleted and there's nothing left to recover. Every day you wait is a day off the clock — and a day added to what you've lost.
+    </p>
+  </div>
+</div>
 
 <!-- PROBLEM / STORY -->
 <section class="story" id="how">
@@ -585,7 +600,7 @@
       <div class="mod"><div class="num">02</div><h4>Build what makes them take you seriously</h4><p>Exactly what to gather — and the one screen almost everybody misses.</p></div>
       <div class="mod"><div class="num">03</div><h4>Why the appeal button never works</h4><p>What that loop is really doing to your case, and why you stop feeding it.</p></div>
       <div class="mod"><div class="num">04</div><h4>Put yourself on the record</h4><p>A free step, about an hour, that quietly changes how you get treated.</p></div>
-      <div class="mod"><div class="num">05</div><h4>The channel that actually works</h4><p>The part nobody tells you about — the reason accounts really come back.</p></div>
+      <div class="mod"><div class="num">05</div><h4>The channel that actually works</h4><p>Every company has a legal address on public record — where lawsuits get delivered, not customer support. We show you how to find it for any company in any state in about 90 seconds. For Instagram and Facebook, both are printed in the book.</p></div>
       <div class="mod"><div class="num">06</div><h4>The exact words, written for you</h4><p>Fill-in-the-blank. You never have to figure out what to say.</p></div>
       <div class="mod"><div class="num">07</div><h4>How to send it so it lands</h4><p>Get in front of the right people instead of a computer queue.</p></div>
       <div class="mod"><div class="num">08</div><h4>The waiting game</h4><p>What to do — and what to never do — while it works.</p></div>
@@ -607,30 +622,39 @@
     <div class="offer-grid">
       <div class="offer">
         <div class="oname">The Playbook · Do it yourself</div>
+        <p style="color:#9296a0;font-size:13.5px;line-height:1.5;margin:0 0 6px">Your account is losing you money every day it's down. This costs less than one day of it.</p>
         <div class="price">$47</div>
-        <div class="tag2">Everything I did, written down. You run it.</div>
+        <div class="tag2">Do it yourself, with everything handed to you.</div>
         <ul>
-          <li>The full 37-page, 9-module PDF</li>
-          <li>Every complaint + letter template, copy-ready</li>
-          <li>The channel that actually works — the reason it comes back</li>
-          <li>Master checklist — tear it out, work top to bottom</li>
-          <li>Instant download after checkout</li>
+          <li>The full 9-module playbook — every step written out</li>
+          <li><b>Both mailing addresses, printed in full</b> — nothing to look up</li>
+          <li>The demand letter, fill-in-the-blank</li>
+          <li>Complaint text for all three agencies, copy-ready</li>
+          <li>The real letter that worked — both pages, so you see what one looks like</li>
+          <li>Post-office script — the exact sentence to say at the counter</li>
+          <li>Tear-out master checklist</li>
         </ul>
         <!-- Paste your $47 Gumroad product link into href -->
         <a href="https://stan.store/accessconnect/p/get-your-ig-back" target="_blank" rel="noopener" class="btn block">Get the playbook — $47</a>
+        <p style="color:#9296a0;font-size:12.5px;line-height:1.5;margin:12px 0 0;text-align:center">Instant download, yours forever. If it isn't what you expected, email within 7 days and we'll refund it.</p>
       </div>
       <div class="offer feature">
-        <div class="oname">Hands-Free · We run it for you</div>
+        <div class="oname">Hands-Free · We build it for you</div>
+        <p style="color:#9296a0;font-size:13.5px;line-height:1.5;margin:0 0 6px">The alternative is a lawyer at $300/hour who'll spend the first hour learning what this is.</p>
         <div class="price">$499</div>
-        <div class="tag2">Just fix it for me. You send us the raw material — we do the rest.</div>
+        <div class="tag2">Send us your screenshots. We build the whole thing.</div>
         <ul>
-          <li>We build your full evidence packet</li>
-          <li>We prepare your entire filing, start to finish</li>
-          <li>We route it through the channel that actually works</li>
-          <li>We handle every submission on your behalf</li>
-          <li>You stay the claimant — done-for-you, done right</li>
+          <li>We read your entire file — every chat, every denial</li>
+          <li>We write your letter from your facts</li>
+          <li>We build your evidence packet, numbered and indexed</li>
+          <li>Both envelope sheets, addressed and ready</li>
+          <li>All three complaints, written for you to paste</li>
+          <li>Your damages worksheet</li>
+          <li><b>You sign and send</b> — it stays your claim, in your name</li>
+          <li>Print-ready files back within 3 business days</li>
         </ul>
-        <button class="btn block dark" onclick="openIntake()">Start Hands-Free — $499</button>
+        <button class="btn block dark" onclick="openIntake()">Start my case — $499</button>
+        <p style="color:#9296a0;font-size:12.5px;line-height:1.5;margin:12px 0 0;text-align:center">Document preparation, not legal representation. No outcome is guaranteed.</p>
       </div>
     </div>
     <p class="microcopy">Secure checkout · Not affiliated with Instagram or Meta · Not legal advice · No guarantee — and anybody selling you one is lying to you.</p>
@@ -673,44 +697,10 @@
   <div class="wrap">
     <div class="eyebrow">Reviews</div>
     <h2 class="lead" style="margin-top:16px">What people are saying.</h2>
-    <p class="kick">Real reviews from real buyers, added as they come in.</p>
-    <div class="demo-banner">⚠ The cards below are SAMPLE placeholders showing the layout — replace with genuine reviews before launch.</div>
-    <div class="rev-grid">
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"Three months of appeals, nothing. Sent the two letters like the guide said. Fourteen days later my account was just… back. The registered-agent thing is the whole game."</p>
-        <div class="who"><div class="av">M</div><div><b>Marcus D.</b><span>DIY playbook</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"I didn't have time to fight Meta myself so I did the hands-free. They built the whole packet, mailed it, and kept me posted. Page came back in about three weeks."</p>
-        <div class="who"><div class="av">S</div><div><b>Sofia R.</b><span>Hands-Free</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"Was ready to give up on a 6-year business page. The 'find out why' module alone showed me a dead ad account I forgot existed. That was the flag the whole time."</p>
-        <div class="who"><div class="av">J</div><div><b>James T.</b><span>DIY playbook</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★☆</div>
-        <p>"Took longer than I hoped — closer to 30 days — but it worked. The templates saved me. I would've never known to write it as a notice of claim instead of begging support."</p>
-        <div class="who"><div class="av">A</div><div><b>Ava L.</b><span>DIY playbook</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"Honest and no BS. It literally tells you it won't work if you actually broke the rules. That's why I trusted it. Got my page back and my clients can find me again."</p>
-        <div class="who"><div class="av">D</div><div><b>Devon P.</b><span>Hands-Free</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"$47 to get back an account that made me thousands a month is the best money I've spent. Wish I'd found this before wasting a month on the appeal button."</p>
-        <div class="who"><div class="av">K</div><div><b>Kayla M.</b><span>DIY playbook</span></div></div>
-      </div>
-      <div class="rev"><span class="sample-ribbon">SAMPLE</span>
-        <div class="stars">★★★★★</div>
-        <p>"The certified-mail step felt weird until the green card came back signed. Eleven days after that, the 'we're sorry' email showed up. Exactly like they said."</p>
-        <div class="who"><div class="av">R</div><div><b>Ruben C.</b><span>DIY playbook</span></div></div>
-      </div>
+    <div class="rev-empty">
+      <p class="rev-empty-lead">No reviews yet — this business is new.</p>
+      <p>Verified reviews from real buyers will appear here as they come in, and nothing else will. Everyone in this space has a wall of five-star testimonials. We'd rather show you an empty page than a fake one.</p>
+      <p class="rev-empty-cta">Used this and got your account back? <b>Leave a review below</b> — it helps the next person who's panicking right now.</p>
     </div>
 
     <div class="rev-cta">
@@ -722,7 +712,7 @@
           <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
         </div>
         <input type="hidden" name="rating" id="ratingVal" value="5">
-        <label class="fld"><span>Your name (or initials)</span><input name="name" type="text" placeholder="e.g. Marcus D." required></label>
+        <label class="fld"><span>Your name (or initials)</span><input name="name" type="text" placeholder="e.g. your first name + last initial" required></label>
         <label class="fld"><span>Which did you use?</span>
           <select name="product" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;font-size:15px;background:var(--surface2);color:var(--ink)">
             <option>DIY playbook ($47)</option><option>Hands-Free ($499)</option>
@@ -787,8 +777,9 @@
     <h2 class="lead" style="margin:16px 0 30px">FAQ</h2>
     <details open><summary>Is this legal?</summary><p>100%. Everything runs through official, legitimate channels — no hacking, no passwords, no impersonation, nothing against Meta's rules. It's the same kind of paperwork a lawyer would use, made simple enough for a normal person to follow.</p></details>
     <details><summary>Are you affiliated with Instagram or Meta?</summary><p>No. This is an independent guide and service with no connection to, endorsement by, or affiliation with Instagram or Meta Platforms, Inc. We just know how their front door and their legal door differ.</p></details>
-    <details><summary>How long does it take?</summary><p>Most cases that come back land in a <b>10–30 day window</b> once the process is set in motion. In the founder's own case it was about two weeks. Some take longer, some never move — there's no set clock and no guarantee. The playbook tells you exactly what to do, and just as importantly, what <em>not</em> to do while you wait.</p></details>
-    <details><summary>Do you guarantee I'll get my account back?</summary><p>No — and you should walk away from anyone who does. This documents a method that worked for a real account and has worked since. It will not undo a legitimate ban. See "who this is for" above.</p></details>
+    <details><summary>How long does it take?</summary><p>In the one documented case on this site, the account came back <b>eleven days after the letters were delivered</b> — about four weeks from start to finish. That's one case, not a pattern. Some take longer. Some never move. There's no set clock and no guarantee. The playbook tells you exactly what to do, and just as importantly, what <em>not</em> to do while you wait.</p></details>
+    <details><summary>What if it doesn't work for me?</summary><p>Then you'll have spent $47 and a few hours, and you'll have a complete documented record of everything that happened — which is exactly what you'd need if you ever took it further. What you won't have is a guarantee, because nobody honest can give you one. If you actually violated policy, no letter brings the account back, and we'd rather say so now than take your money.</p></details>
+    <details><summary>Do you guarantee I'll get my account back?</summary><p>No — and you should walk away from anyone who does. This documents a method that worked for a real account. It will not undo a legitimate ban. See "who this is for" above.</p></details>
     <details><summary>What's the difference between $47 and $499?</summary><p>$47 is the playbook — you do the work yourself, with every template and step handed to you. $499 is hands-free: you send us your details and screenshots, and we build the whole case and handle the entire filing for you. You remain the claimant; it's document prep and filing, not legal representation.</p></details>
     <details><summary>What do you need from me for Hands-Free?</summary><p>Your handle, the date the page went down, your money lost (and roughly per day), what your login screen says, and screenshots of everything — support chats, denial emails, the Account Quality page, and any dashboard showing your account in good standing. The intake walks you through it.</p></details>
   </div>
@@ -916,6 +907,7 @@
 
         <div class="fgroup">8 · Evidence</div>
         <p class="upload-hint">Upload everything, or paste a share link if the files are large:</p>
+        <p class="helper">🔒 Your files go straight to our private case system for your case only — they're never posted publicly on this website.</p>
         <label class="fld"><span>Upload your screenshots <span class="rq">*</span></span><input name="screenshots" type="file" accept="image/*,.pdf,.heic" multiple>
           <small>Support chats (scrolled back to the FIRST message), denial emails, the Account Quality page, any dashboard showing good standing.</small></label>
         <label class="fld"><span>…or paste a share link</span><input name="share_link" type="url" placeholder="Google Drive / Dropbox link"></label>
