@@ -381,6 +381,17 @@
   .rev-empty .rev-empty-lead{color:var(--ink);font-size:19px;font-weight:700;margin-bottom:10px}
   .rev-empty .rev-empty-cta{color:#c8ccd4;margin-bottom:0;margin-top:16px;border-top:1px solid var(--line);padding-top:16px}
   .rev-empty .rev-empty-cta b{color:var(--ink)}
+  /* sticky mobile CTA — always in reach on phones */
+  .sticky-cta{display:none}
+  @media(max-width:640px){
+    .sticky-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:90;
+      align-items:center;gap:12px;justify-content:space-between;
+      background:rgba(10,11,14,.94);backdrop-filter:blur(10px);
+      border-top:1px solid var(--line);padding:10px 14px}
+    .sticky-cta span{color:var(--ink);font-weight:700;font-size:14.5px}
+    .sticky-cta .btn{padding:11px 18px;font-size:14px;white-space:nowrap}
+    body{padding-bottom:66px}
+  }
 </style>
 <link rel="canonical" href="https://accountrecovered.com/">
 <meta name="robots" content="index,follow">
@@ -614,6 +625,84 @@
   </div>
 </section>
 
+<!-- RESULTS (bottom) -->
+<section class="proof" id="results">
+  <div class="wrap">
+    <div class="eyebrow">Results</div>
+    <h2 class="lead" style="margin:16px 0 8px">It works. Here's the proof.</h2>
+    <span class="case-badge">Case #1</span>
+    <div class="proof-grid" style="margin-top:24px">
+      <div>
+        <!-- Rebuilt from the real Meta email; handle redacted for privacy. Not a fabricated result. -->
+        <div class="email" aria-label="Email from Instagram: You're back">
+          <div class="bar"><span>‹ 1 Message</span><span>Summarize</span></div>
+          <div class="from">
+            <span class="ig-badge"></span>
+            <div><b>Instagram</b><div class="t">to me</div></div>
+            <span class="time">11:21 AM</span>
+          </div>
+          <div class="subject">You're back on Instagram, <span class="redact">••••••••</span></div>
+          <div class="body">
+            <p>Hi <span class="redact">••••••••</span>,</p>
+            <p>Thanks for taking the time to request a review. We reviewed your account and found that the activity on it <b>does follow our Community Standards</b>, so you can use Instagram again.</p>
+            <p>We're sorry we got this wrong and that you weren't able to use Instagram for a while.</p>
+          </div>
+          <div class="cta">Log into Instagram</div>
+          <div class="foot">from Meta · Meta Platforms, Inc., Menlo Park, CA 94025</div>
+        </div>
+      </div>
+      <div>
+        <h2>A 15-year account, back in the owner's hands.</h2>
+        <p class="kick" style="margin-top:14px">Disabled without cause. Weeks of appeals went nowhere. Then the right move — and it came back.</p>
+        <ul class="timeline">
+          <li><span class="d">Sunday, Jul</span><span>Account disabled. No reason given.</span></li>
+          <li><span class="d">Days 1–14</span><span>Appeals filed. Every one denied by automation.</span></li>
+          <li><span class="d">Day 15</span><span>Made the one move almost nobody knows about.</span></li>
+          <li><span class="d">+11 days</span><span>"We're sorry we got this wrong." Account restored, 11:21 AM.</span></li>
+        </ul>
+        <p class="honest-note">Real, documented recovery — handle redacted for privacy. More wins get added here as clients come through, with permission. No guarantees, no BS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CHECKLIST — open door before any ask; captures the lead, reveals instantly -->
+<section id="checklist" style="padding:72px 0">
+  <div class="wrap">
+    <div class="eyebrow">Start free</div>
+    <h2 class="lead" style="margin-top:16px;max-width:720px">Not sure this even fits your situation?</h2>
+    <p class="kick" style="max-width:680px">Answer 7 quick questions and know in about two minutes whether this method fits your case — or whether you'd be wasting your time and money. Free, honest, no catch.</p>
+
+    <div id="clGate" style="max-width:520px;margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 28px">
+      <form id="clForm" onsubmit="return submitChecklist(event)">
+        <label class="fld" style="display:block"><span style="display:block;color:var(--muted);font-size:13px;margin-bottom:8px">Where should the checklist be sent? (You'll also see it right here.)</span>
+          <input name="email" type="email" required placeholder="you@email.com" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;font-size:15px;background:var(--surface2);color:var(--ink)"></label>
+        <button type="submit" class="btn block" style="margin-top:14px">Show me the checklist →</button>
+        <p style="color:var(--muted);font-size:12px;margin-top:10px;text-align:center">No spam. Unsubscribe anytime.</p>
+      </form>
+    </div>
+
+    <div id="clResult" style="display:none;max-width:640px;margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px 30px">
+      <h3 style="color:var(--ink);font-size:20px;margin-bottom:6px">Is your account recoverable? — the 7-question check</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Answer honestly. The method is built for accounts taken down <em>by mistake</em> — not ones that actually broke the rules.</p>
+      <ol style="color:#c8ccd4;font-size:15.5px;line-height:1.6;padding-left:20px">
+        <li style="margin-bottom:12px">Was your account disabled or suspended with <b>no clear reason</b> given?</li>
+        <li style="margin-bottom:12px">Do you believe you <b>did not actually violate</b> Instagram or Meta's rules?</li>
+        <li style="margin-bottom:12px">Were you flagged by <b>"association"</b> with another account — or you genuinely can't explain why?</li>
+        <li style="margin-bottom:12px">Did you appeal and get a <b>copy-paste denial</b> with no specific policy named?</li>
+        <li style="margin-bottom:12px">Does Meta's Account Quality page still show you in <b>good standing</b> (or did before)?</li>
+        <li style="margin-bottom:12px">Was it a <b>real</b> personal or business account, following the rules?</li>
+        <li style="margin-bottom:0">Are you willing to <b>mail a physical letter</b> — not just tap "appeal" again?</li>
+      </ol>
+      <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:18px">
+        <p style="color:var(--ink);font-weight:600;margin-bottom:6px">Mostly "yes"? This method was built for exactly your situation.</p>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:16px">If you answered "no" to #2 — if you actually broke the rules — no letter brings the account back, and this won't help. That's the honest answer.</p>
+        <a href="#offers" class="btn block">See your two options ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- OFFERS -->
 <section class="offers" id="offers">
   <div class="wrap">
@@ -729,47 +818,6 @@
   </div>
 </section>
 
-<!-- RESULTS (bottom) -->
-<section class="proof" id="results">
-  <div class="wrap">
-    <div class="eyebrow">Results</div>
-    <h2 class="lead" style="margin:16px 0 8px">It works. Here's the proof.</h2>
-    <span class="case-badge">Case #1</span>
-    <div class="proof-grid" style="margin-top:24px">
-      <div>
-        <!-- Rebuilt from the real Meta email; handle redacted for privacy. Not a fabricated result. -->
-        <div class="email" aria-label="Email from Instagram: You're back">
-          <div class="bar"><span>‹ 1 Message</span><span>Summarize</span></div>
-          <div class="from">
-            <span class="ig-badge"></span>
-            <div><b>Instagram</b><div class="t">to me</div></div>
-            <span class="time">11:21 AM</span>
-          </div>
-          <div class="subject">You're back on Instagram, <span class="redact">••••••••</span></div>
-          <div class="body">
-            <p>Hi <span class="redact">••••••••</span>,</p>
-            <p>Thanks for taking the time to request a review. We reviewed your account and found that the activity on it <b>does follow our Community Standards</b>, so you can use Instagram again.</p>
-            <p>We're sorry we got this wrong and that you weren't able to use Instagram for a while.</p>
-          </div>
-          <div class="cta">Log into Instagram</div>
-          <div class="foot">from Meta · Meta Platforms, Inc., Menlo Park, CA 94025</div>
-        </div>
-      </div>
-      <div>
-        <h2>A 15-year account, back in the owner's hands.</h2>
-        <p class="kick" style="margin-top:14px">Disabled without cause. Weeks of appeals went nowhere. Then the right move — and it came back.</p>
-        <ul class="timeline">
-          <li><span class="d">Sunday, Jul</span><span>Account disabled. No reason given.</span></li>
-          <li><span class="d">Days 1–14</span><span>Appeals filed. Every one denied by automation.</span></li>
-          <li><span class="d">Day 15</span><span>Made the one move almost nobody knows about.</span></li>
-          <li><span class="d">+11 days</span><span>"We're sorry we got this wrong." Account restored, 11:21 AM.</span></li>
-        </ul>
-        <p class="honest-note">Real, documented recovery — handle redacted for privacy. More wins get added here as clients come through, with permission. No guarantees, no BS.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section>
   <div class="wrap">
@@ -806,6 +854,12 @@
     <p style="margin-top:8px"><a href="/admin/" style="color:var(--muted);font-size:12px;text-decoration:none">Owner login</a></p>
   </div>
 </footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <span>Get the playbook — $47</span>
+  <a href="#offers" class="btn">Get it back</a>
+</div>
 
 <!-- HANDS-FREE INTAKE MODAL — questionnaire first, then pay -->
 <div class="modal" id="intake">
@@ -1022,6 +1076,33 @@
   }
   document.getElementById('intake').addEventListener('click',function(e){if(e.target===this)closeIntake();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeIntake();});
+
+  // ----- Free checklist: capture the lead (Web3Forms) + reveal the questions instantly -----
+  async function submitChecklist(e){
+    e.preventDefault();
+    var form=document.getElementById('clForm');
+    var email=(new FormData(form)).get('email');
+    // reveal instantly — never block the reader on the network call
+    document.getElementById('clGate').style.display='none';
+    var res=document.getElementById('clResult');
+    res.style.display='block';
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+    if(WEB3FORMS_KEY){
+      try{
+        await fetch('https://api.web3forms.com/submit',{
+          method:'POST',
+          headers:{'Content-Type':'application/json',Accept:'application/json'},
+          body:JSON.stringify({
+            access_key:WEB3FORMS_KEY,
+            subject:'🟢 New checklist lead: '+email,
+            from_name:'Account Recovered — Free Checklist',
+            Email:email, Source:'Free 7-question checklist'
+          })
+        });
+      }catch(err){ console.error('checklist lead failed', err); }
+    }
+    return false;
+  }
 
   // ----- Reviews (frontend-only demo). BACKEND HOOKUP: POST to backend for moderation, then render approved reviews. -----
   function submitReview(e){
